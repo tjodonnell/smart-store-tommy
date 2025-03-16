@@ -1,7 +1,5 @@
 # smart-store-tommy
 This repository is for Module 1 of BI and Analytics
-# smart-store-kjleopold
-BI and Analytics Project
 
 ## Project Setup
 ### 1. Create a Repository in GitHub
