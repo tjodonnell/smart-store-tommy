@@ -82,14 +82,14 @@ Find raw data .csv files in course repo and download to data\raw folder
 py scripts\data_prep.py
 ```
 ### 13. PIP List
-1. colorama        0.4.6
-2. loguru          0.7.3
-3. numpy           2.2.3
-4. pandas          2.2.3
-5. pip             24.3.1
-6. python-dateutil 2.9.0.post0
-7. pytz            2025.1
-8. setuptools      65.5.0
-9. six             1.17.0
-10. tzdata          2025.1
-11. win32_setctime  1.2.0
+1. colorama        
+2. loguru          
+3. numpy           
+4. pandas          
+5. pip             
+6. python-dateutil 
+7. pytz            
+8. setuptools      
+9. six             
+10. tzdata          
+11. win32_setctime  
