@@ -1,4 +1,4 @@
-TransactionID,SaleDate,CustomerID,ProductID,StoreID,CampaignID,SaleAmount,DiscountPercent ,PaymentType
+TransactionID,SaleDate,CustomerID,ProductID,StoreID,CampaignID,SaleAmount,DiscountPercent,PaymentType
 550,1/6/2024,1008,102,404,0,39.1,0%,Cash
 551,1/6/2024,1009,105,403,0,19.78,5%,CreditCard
 552,1/16/2024,1004,107,404,0,335.1,10%,DebitCard
