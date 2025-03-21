@@ -199,3 +199,41 @@
 2025-03-20 19:49:03.838 | INFO     | __main__:main:124 - ======================
 2025-03-20 19:49:03.838 | INFO     | __main__:main:125 - FINISHED data_prep.py
 2025-03-20 19:49:03.838 | INFO     | __main__:main:126 - ======================
+2025-03-20 20:26:40.590 | INFO     | utils.logger:<module>:39 - Logging to file: logs\project_log.log
+2025-03-20 20:26:40.590 | INFO     | __main__:main:59 - ======================
+2025-03-20 20:26:40.625 | INFO     | __main__:main:60 - STARTING data_prep.py
+2025-03-20 20:26:40.636 | INFO     | __main__:main:61 - ======================
+2025-03-20 20:26:40.667 | INFO     | __main__:main:63 - ========================
+2025-03-20 20:26:40.668 | INFO     | __main__:main:64 - Starting CUSTOMERS prep
+2025-03-20 20:26:40.668 | INFO     | __main__:main:65 - ========================
+2025-03-20 20:26:40.729 | INFO     | __main__:save_prepared_data:55 - Data saved to C:\Projects\smart-store-tommy\data\prepared\customers_data_prepared.csv
+2025-03-20 20:26:40.731 | INFO     | __main__:main:85 - ========================
+2025-03-20 20:26:40.734 | INFO     | __main__:main:86 - Starting PRODUCTS prep
+2025-03-20 20:26:40.734 | INFO     | __main__:main:87 - ========================
+2025-03-20 20:26:40.748 | INFO     | __main__:save_prepared_data:55 - Data saved to C:\Projects\smart-store-tommy\data\prepared\products_data_prepared.csv
+2025-03-20 20:26:40.748 | INFO     | __main__:main:103 - ========================
+2025-03-20 20:26:40.748 | INFO     | __main__:main:104 - Starting SALES prep
+2025-03-20 20:26:40.750 | INFO     | __main__:main:105 - ========================
+2025-03-20 20:26:40.765 | INFO     | __main__:save_prepared_data:55 - Data saved to C:\Projects\smart-store-tommy\data\prepared\sales_data_prepared.csv
+2025-03-20 20:26:40.765 | INFO     | __main__:main:124 - ======================
+2025-03-20 20:26:40.765 | INFO     | __main__:main:125 - FINISHED data_prep.py
+2025-03-20 20:26:40.766 | INFO     | __main__:main:126 - ======================
+2025-03-20 20:28:50.755 | INFO     | utils.logger:<module>:39 - Logging to file: logs\project_log.log
+2025-03-20 20:28:50.755 | INFO     | __main__:main:59 - ======================
+2025-03-20 20:28:50.771 | INFO     | __main__:main:60 - STARTING data_prep.py
+2025-03-20 20:28:50.771 | INFO     | __main__:main:61 - ======================
+2025-03-20 20:28:50.771 | INFO     | __main__:main:63 - ========================
+2025-03-20 20:28:50.771 | INFO     | __main__:main:64 - Starting CUSTOMERS prep
+2025-03-20 20:28:50.771 | INFO     | __main__:main:65 - ========================
+2025-03-20 20:28:50.771 | INFO     | __main__:save_prepared_data:55 - Data saved to C:\Projects\smart-store-tommy\data\prepared\customers_data_prepared.csv
+2025-03-20 20:28:50.771 | INFO     | __main__:main:85 - ========================
+2025-03-20 20:28:50.787 | INFO     | __main__:main:86 - Starting PRODUCTS prep
+2025-03-20 20:28:50.788 | INFO     | __main__:main:87 - ========================
+2025-03-20 20:28:50.804 | INFO     | __main__:save_prepared_data:55 - Data saved to C:\Projects\smart-store-tommy\data\prepared\products_data_prepared.csv
+2025-03-20 20:28:50.804 | INFO     | __main__:main:103 - ========================
+2025-03-20 20:28:50.804 | INFO     | __main__:main:104 - Starting SALES prep
+2025-03-20 20:28:50.804 | INFO     | __main__:main:105 - ========================
+2025-03-20 20:28:50.902 | INFO     | __main__:save_prepared_data:55 - Data saved to C:\Projects\smart-store-tommy\data\prepared\sales_data_prepared.csv
+2025-03-20 20:28:50.902 | INFO     | __main__:main:124 - ======================
+2025-03-20 20:28:50.902 | INFO     | __main__:main:125 - FINISHED data_prep.py
+2025-03-20 20:28:50.902 | INFO     | __main__:main:126 - ======================

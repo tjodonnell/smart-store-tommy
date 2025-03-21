@@ -93,3 +93,6 @@ TransactionID,SaleDate,CustomerID,ProductID,StoreID,CampaignID,SaleAmount,Discou
 641,9/30/2024,1010,103,402,3,45.52,30%,CreditCard
 642,10/10/2024,1002,101,402,0,5551.84,35%,Cash
 643,10/10/2024,1010,104,402,0,301.7,0%,Cash
+630,8/21/2024,1007,104,405,0,172.4,25%,CreditCard
+597,5/29/2024,1008,102,404,0,195.5,15%,DebitCard
+900,,,,,0,,,

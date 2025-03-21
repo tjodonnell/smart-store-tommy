@@ -7,3 +7,4 @@ ProductID,ProductName,Category,UnitPrice,StockQuantity,StoreSection
 106,controller,Electronics,88.98,12,VideoGames
 107,jacket,Clothing,67.02,16,MensClothing
 108,protector,Electronics,12.56,44,CellPhones
+103,cable,Electronics,22.76,30,Televisions
