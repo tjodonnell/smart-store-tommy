@@ -1,4 +1,4 @@
-"""
+r"""
 scripts/data_scrubber.py
 
 Do not run this script directly. 
@@ -62,9 +62,15 @@ class DataScrubber:
         
         Returns:
             pd.DataFrame: Updated DataFrame with the column type converted.
+
+        Raises:
+            ValueError: If the specified column not found in the DataFrame.
         """
-        self.df[column] = self.df[column].astype(new_type)
-        return self.df
+        try:
+            self.df[column] = self.df[column].astype(new_type)
+            return self.df
+        except KeyError:
+            raise ValueError(f"Column name '{column}' not found in the DataFrame.")
 
     def drop_columns(self, columns: List[str]) -> pd.DataFrame:
         """
@@ -75,8 +81,14 @@ class DataScrubber:
         
         Returns:
             pd.DataFrame: Updated DataFrame with specified columns removed.
+
+        Raises:
+            ValueError: If a specified column is not found in the DataFrame.
         """
-        self.df = self.df.drop(columns=columns, errors='ignore')
+        for column in columns:
+            if column not in self.df.columns:
+                raise ValueError(f"Column name '{column}' not found in the DataFrame.")
+        self.df = self.df.drop(columns=columns)
         return self.df
 
     def filter_column_outliers(self, column: str, lower_bound: Union[float, int], upper_bound: Union[float, int]) -> pd.DataFrame:
@@ -90,9 +102,15 @@ class DataScrubber:
         
         Returns:
             pd.DataFrame: Updated DataFrame with outliers filtered out.
+ 
+        Raises:
+            ValueError: If the specified column not found in the DataFrame.
         """
-        self.df = self.df[(self.df[column] >= lower_bound) & (self.df[column] <= upper_bound)]
-        return self.df
+        try:
+            self.df = self.df[(self.df[column] >= lower_bound) & (self.df[column] <= upper_bound)]
+            return self.df
+        except KeyError:
+            raise ValueError(f"Column name '{column}' not found in the DataFrame.")
 
     def format_column_strings_to_lower_and_trim(self, column: str) -> pd.DataFrame:
         """
@@ -103,10 +121,16 @@ class DataScrubber:
         
         Returns:
             pd.DataFrame: Updated DataFrame with formatted string column.
-        """
-        self.df[column] = self.df[column].str.lower().str.strip()
-        return self.df
 
+        Raises:
+            ValueError: If the specified column not found in the DataFrame.
+        """
+        try:
+            self.df[column] = self.df[column].str.lower().str.strip()
+            return self.df
+        except KeyError:
+            raise ValueError(f"Column name '{column}' not found in the DataFrame.")
+        
     def format_column_strings_to_upper_and_trim(self, column: str) -> pd.DataFrame:
         """
         Format strings in a specified column by converting to uppercase and trimming whitespace.
@@ -116,9 +140,17 @@ class DataScrubber:
         
         Returns:
             pd.DataFrame: Updated DataFrame with formatted string column.
+
+        Raises:
+            ValueError: If the specified column not found in the DataFrame.
         """
-        self.df[column] = self.df[column].str.upper().str.strip()
-        return self.df
+        try:
+            # TODO: Fix the following logic to call str.upper() and str.strip() on the given column 
+            # HINT: See previous function for an example
+            self.df[column] = self.df[column]
+            return self.df
+        except KeyError:
+            raise ValueError(f"Column name '{column}' not found in the DataFrame.")
 
     def handle_missing_data(self, drop: bool = False, fill_value: Union[None, float, int, str] = None) -> pd.DataFrame:
         """
@@ -148,6 +180,8 @@ class DataScrubber:
         buffer = io.StringIO()
         self.df.info(buf=buffer)
         info_str = buffer.getvalue()  # Retrieve the string content of the buffer
+
+        # Capture the describe output as a string
         describe_str = self.df.describe().to_string()  # Convert DataFrame.describe() output to a string
         return info_str, describe_str
 
@@ -160,16 +194,23 @@ class DataScrubber:
         
         Returns:
             pd.DataFrame: Updated DataFrame with a new 'StandardDateTime' column containing parsed datetime values.
+
+        Raises:
+            ValueError: If the specified column not found in the DataFrame.
         """
-        self.df['StandardDateTime'] = pd.to_datetime(self.df[column], errors='coerce')
-        return self.df
-    
+        try:
+            self.df['StandardDateTime'] = pd.to_datetime(self.df[column])
+            return self.df
+        except KeyError:
+            raise ValueError(f"Column name '{column}' not found in the DataFrame.")
+
     def remove_duplicate_records(self) -> pd.DataFrame:
         """
         Remove duplicate rows from the DataFrame.
         
         Returns:
             pd.DataFrame: Updated DataFrame with duplicates removed.
+
         """
         self.df = self.df.drop_duplicates()
         return self.df
@@ -183,7 +224,15 @@ class DataScrubber:
         
         Returns:
             pd.DataFrame: Updated DataFrame with renamed columns.
+
+        Raises:
+            ValueError: If a specified column is not found in the DataFrame.
         """
+
+        for old_name, new_name in column_mapping.items():
+            if old_name not in self.df.columns:
+                raise ValueError(f"Column '{old_name}' not found in the DataFrame.")
+
         self.df = self.df.rename(columns=column_mapping)
         return self.df
 
@@ -196,7 +245,13 @@ class DataScrubber:
         
         Returns:
             pd.DataFrame: Updated DataFrame with reordered columns.
+
+        Raises:
+            ValueError: If a specified column is not found in the DataFrame.
         """
+        for column in columns:
+            if column not in self.df.columns:
+                raise ValueError(f"Column name '{column}' not found in the DataFrame.")
         self.df = self.df[columns]
         return self.df
     
