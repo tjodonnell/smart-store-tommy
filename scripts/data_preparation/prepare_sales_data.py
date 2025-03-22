@@ -1,58 +1,63 @@
 import sys
 import pathlib
 import pandas as pd
-from logs.logger import logger  # Updated import for logger
-from scripts.data_scrubber import DataScrubber  # noqa: E402
 
-# Add the project root to sys.path
+# Add the project root directory to Python's sys.path
 PROJECT_ROOT = pathlib.Path(__file__).resolve().parent.parent.parent
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.append(str(PROJECT_ROOT))
 
+# Import local modules
+from utils.logger import logger  # noqa: E402
+from scripts.data_scrubber import DataScrubber  # noqa: E402
+
 # Constants
-DATA_DIR = PROJECT_ROOT.joinpath("data")
-RAW_DATA_DIR = DATA_DIR.joinpath("raw")
-PREPARED_SALES_DIR = DATA_DIR.joinpath("prepared/sales")
+DATA_DIR: pathlib.Path = PROJECT_ROOT.joinpath("data")
+RAW_DATA_DIR: pathlib.Path = DATA_DIR.joinpath("raw")
+PREPARED_DATA_DIR: pathlib.Path = DATA_DIR.joinpath("prepared")
 
 def read_raw_data(file_name: str) -> pd.DataFrame:
-    file_path = RAW_DATA_DIR.joinpath(file_name)
+    """Read raw data from CSV."""
+    file_path: pathlib.Path = RAW_DATA_DIR.joinpath(file_name)
     logger.info(f"Reading raw data from {file_path}")
     return pd.read_csv(file_path)
 
 def save_prepared_data(df: pd.DataFrame, file_name: str) -> None:
-    PREPARED_SALES_DIR.mkdir(parents=True, exist_ok=True)
-    file_path = PREPARED_SALES_DIR.joinpath(file_name)
+    """Save cleaned data to CSV."""
+    file_path: pathlib.Path = PREPARED_DATA_DIR.joinpath(file_name)
     df.to_csv(file_path, index=False)
     logger.info(f"Data saved to {file_path}")
 
-def remove_outliers(df: pd.DataFrame, column: str) -> pd.DataFrame:
-    if column in df.columns:
-        mean_value = df[column].mean()
-        threshold = 1.5 * mean_value
-        logger.info(f"Removing outliers in column '{column}' greater than {threshold}")
-        return df[df[column] <= threshold]
-    else:
-        logger.warning(f"Column '{column}' not found in the DataFrame. No outliers removed.")
-        return df
+def main() -> None:
+    """Main function for pre-processing sales data."""
+    logger.info("======================")
+    logger.info("STARTING prepare_sales_data.py")
+    logger.info("======================")
 
-def prepare_sales_data():
-    logger.info("Starting SALES data preparation...")
+    logger.info("========================")
+    logger.info("Starting SALES prep")
+    logger.info("========================")
+
     df_sales = read_raw_data("sales_data.csv")
 
-    df_sales.columns = df_sales.columns.str.strip()
-    df_sales = df_sales.drop_duplicates()
-    df_sales['SaleDate'] = pd.to_datetime(df_sales['SaleDate'], errors='coerce')
-    df_sales = df_sales.dropna(subset=['TransactionID', 'SaleDate'])
+    # Data cleaning operations
+    df_sales.columns = df_sales.columns.str.strip()  # Clean column names
+    df_sales = df_sales.drop_duplicates()            # Remove duplicates
+    df_sales['SaleDate'] = pd.to_datetime(df_sales['SaleDate'], errors='coerce')  # Convert to datetime
+    df_sales = df_sales.dropna(subset=['TransactionID', 'SaleDate'])  # Drop rows missing critical info
+    
+    # Scrubber operations
+    scrubber_sales = DataScrubber(df_sales)
+    scrubber_sales.check_data_consistency_before_cleaning()
+    scrubber_sales.inspect_data()
+    
+    # Handle missing data and perform outlier removal
+    df_sales = scrubber_sales.handle_missing_data(fill_value="Unknown")
+    scrubber_sales.check_data_consistency_after_cleaning()
 
-    scrubber = DataScrubber(df_sales)
-    scrubber.check_data_consistency_before_cleaning()
-    scrubber.inspect_data()
-    df_sales = remove_outliers(scrubber.df, "SaleAmount")
-    scrubber.df = df_sales
-
-    scrubber.check_data_consistency_after_cleaning()
-    save_prepared_data(scrubber.df, "sales_data_prepared.csv")
+    # Save the prepared data
+    save_prepared_data(df_sales, "sales_data_prepared.csv")
     logger.info("SALES data preparation complete.")
 
 if __name__ == "__main__":
-    prepare_sales_data()
+    main()

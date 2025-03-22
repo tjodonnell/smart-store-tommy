@@ -8,7 +8,7 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.append(str(PROJECT_ROOT))
 
 # Now we can import local modules
-from utils.logger import logger  # noqa: E402
+from utils.logger import logger  # Correctly importing logger
 from scripts.data_scrubber import DataScrubber  # noqa: E402
 
 # Constants
