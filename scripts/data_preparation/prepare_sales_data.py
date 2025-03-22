@@ -1,7 +1,7 @@
-import pathlib
 import sys
+import pathlib
 import pandas as pd
-from utils.logger import logger  # noqa: E402
+from logs.logger import logger  # Updated import for logger
 from scripts.data_scrubber import DataScrubber  # noqa: E402
 
 # Add the project root to sys.path
