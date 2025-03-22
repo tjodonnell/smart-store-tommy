@@ -28,6 +28,30 @@ def save_prepared_data(df: pd.DataFrame, file_name: str) -> None:
     df.to_csv(file_path, index=False)
     logger.info(f"Data saved to {file_path}")
 
+def remove_outliers(df: pd.DataFrame, column: str) -> pd.DataFrame:
+    """
+    Remove extreme values from a numeric column using the IQR method.
+
+    Parameters:
+        df (pd.DataFrame): DataFrame to clean.
+        column (str): Column to evaluate for extreme values.
+
+    Returns:
+        pd.DataFrame: Updated DataFrame without extreme values.
+    """
+    if column in df.columns:
+        Q1 = df[column].quantile(0.25)  # First quartile (25th percentile)
+        Q3 = df[column].quantile(0.75)  # Third quartile (75th percentile)
+        IQR = Q3 - Q1  # Interquartile range
+        lower_bound = Q1 - 1.5 * IQR
+        upper_bound = Q3 + 1.5 * IQR
+
+        logger.info(f"Removing outliers in column '{column}': Lower bound = {lower_bound}, Upper bound = {upper_bound}")
+        df = df[(df[column] >= lower_bound) & (df[column] <= upper_bound)]
+    else:
+        logger.warning(f"Column '{column}' not found in the DataFrame. No outliers removed.")
+    return df
+
 def main() -> None:
     """Main function for pre-processing customers data."""
     logger.info("======================")
@@ -45,6 +69,9 @@ def main() -> None:
     df_customers = df_customers.drop_duplicates()            # Remove duplicates
     df_customers['Name'] = df_customers['Name'].str.strip()  # Trim whitespace from column values
     df_customers = df_customers.dropna(subset=['CustomerID', 'Name'])  # Drop rows missing critical info
+    
+    # Remove outliers in a numeric column (example: 'CustomerID')
+    df_customers = remove_outliers(df_customers, "CustomerID")
     
     # Scrubber operations
     scrubber_customers = DataScrubber(df_customers)

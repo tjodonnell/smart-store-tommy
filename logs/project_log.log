@@ -453,3 +453,36 @@
 2025-03-21 20:39:18.608 | INFO     | __main__:read_raw_data:22 - Reading raw data from C:\Projects\smart-store-tommy\data\raw\sales_data.csv
 2025-03-21 20:39:18.635 | INFO     | __main__:save_prepared_data:29 - Data saved to C:\Projects\smart-store-tommy\data\prepared\sales_data_prepared.csv
 2025-03-21 20:39:18.635 | INFO     | __main__:main:60 - SALES data preparation complete.
+2025-03-21 21:06:37.643 | INFO     | utils.logger:<module>:39 - Logging to file: logs\project_log.log
+2025-03-21 21:06:37.645 | INFO     | __main__:main:57 - ======================
+2025-03-21 21:06:37.645 | INFO     | __main__:main:58 - STARTING prepare_customers_data.py
+2025-03-21 21:06:37.645 | INFO     | __main__:main:59 - ======================
+2025-03-21 21:06:37.645 | INFO     | __main__:main:61 - ========================
+2025-03-21 21:06:37.645 | INFO     | __main__:main:62 - Starting CUSTOMERS prep
+2025-03-21 21:06:37.645 | INFO     | __main__:main:63 - ========================
+2025-03-21 21:06:37.645 | INFO     | __main__:read_raw_data:22 - Reading raw data from C:\Projects\smart-store-tommy\data\raw\customers_data.csv
+2025-03-21 21:06:37.650 | INFO     | __main__:remove_outliers:49 - Removing outliers in column 'CustomerID': Lower bound = 996.0, Upper bound = 1016.0
+2025-03-21 21:06:37.687 | INFO     | __main__:save_prepared_data:29 - Data saved to C:\Projects\smart-store-tommy\data\prepared\customers_data_prepared.csv
+2025-03-21 21:06:37.688 | INFO     | __main__:main:87 - CUSTOMERS data preparation complete.
+2025-03-21 21:08:05.565 | INFO     | utils.logger:<module>:39 - Logging to file: logs\project_log.log
+2025-03-21 21:08:05.567 | INFO     | __main__:main:57 - ======================
+2025-03-21 21:08:05.567 | INFO     | __main__:main:58 - STARTING prepare_products_data.py
+2025-03-21 21:08:05.567 | INFO     | __main__:main:59 - ======================
+2025-03-21 21:08:05.567 | INFO     | __main__:main:61 - ========================
+2025-03-21 21:08:05.568 | INFO     | __main__:main:62 - Starting PRODUCTS prep
+2025-03-21 21:08:05.568 | INFO     | __main__:main:63 - ========================
+2025-03-21 21:08:05.568 | INFO     | __main__:read_raw_data:22 - Reading raw data from C:\Projects\smart-store-tommy\data\raw\products_data.csv
+2025-03-21 21:08:05.572 | INFO     | __main__:remove_outliers:49 - Removing outliers in column 'UnitPrice': Lower bound = -53.72749999999998, Upper bound = 148.25249999999997
+2025-03-21 21:08:05.621 | INFO     | __main__:save_prepared_data:29 - Data saved to C:\Projects\smart-store-tommy\data\prepared\products_data_prepared.csv
+2025-03-21 21:08:05.623 | INFO     | __main__:main:83 - PRODUCTS data preparation complete.
+2025-03-21 21:08:13.954 | INFO     | utils.logger:<module>:39 - Logging to file: logs\project_log.log
+2025-03-21 21:08:13.954 | INFO     | __main__:main:57 - ======================
+2025-03-21 21:08:13.954 | INFO     | __main__:main:58 - STARTING prepare_sales_data.py
+2025-03-21 21:08:13.954 | INFO     | __main__:main:59 - ======================
+2025-03-21 21:08:13.954 | INFO     | __main__:main:61 - ========================
+2025-03-21 21:08:13.954 | INFO     | __main__:main:62 - Starting SALES prep
+2025-03-21 21:08:13.954 | INFO     | __main__:main:63 - ========================
+2025-03-21 21:08:13.954 | INFO     | __main__:read_raw_data:22 - Reading raw data from C:\Projects\smart-store-tommy\data\raw\sales_data.csv
+2025-03-21 21:08:13.954 | INFO     | __main__:remove_outliers:49 - Removing outliers in column 'SaleAmount': Lower bound = -774.1574999999999, Upper bound = 1594.5425
+2025-03-21 21:08:13.990 | INFO     | __main__:save_prepared_data:29 - Data saved to C:\Projects\smart-store-tommy\data\prepared\sales_data_prepared.csv
+2025-03-21 21:08:13.990 | INFO     | __main__:main:84 - SALES data preparation complete.
