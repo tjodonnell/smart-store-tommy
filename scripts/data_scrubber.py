@@ -36,6 +36,15 @@ class DataScrubber:
         assert duplicate_count == 0, "Data still contains duplicate records after cleaning."
         return {'null_counts': null_counts, 'duplicate_count': duplicate_count}
 
+    def get_summary_statistics(self) -> pd.DataFrame:
+        """
+        Get summary statistics for numerical columns in the DataFrame.
+        
+        Returns:
+            pd.DataFrame: DataFrame containing summary statistics for numerical columns.
+        """
+        return self.df.describe()
+
     def convert_column_to_new_data_type(self, column: str, new_type: type) -> pd.DataFrame:
         """
         Convert a specified column to a new data type.
@@ -129,9 +138,7 @@ class DataScrubber:
             ValueError: If the specified column not found in the DataFrame.
         """
         try:
-            # TODO: Fix the following logic to call str.upper() and str.strip() on the given column 
-            # HINT: See previous function for an example
-            self.df[column] = self.df[column]
+            self.df[column] = self.df[column].str.upper().str.strip()
             return self.df
         except KeyError:
             raise ValueError(f"Column name '{column}' not found in the DataFrame.")
@@ -212,7 +219,6 @@ class DataScrubber:
         Raises:
             ValueError: If a specified column is not found in the DataFrame.
         """
-
         for old_name, new_name in column_mapping.items():
             if old_name not in self.df.columns:
                 raise ValueError(f"Column '{old_name}' not found in the DataFrame.")
@@ -238,4 +244,3 @@ class DataScrubber:
                 raise ValueError(f"Column name '{column}' not found in the DataFrame.")
         self.df = self.df[columns]
         return self.df
-    

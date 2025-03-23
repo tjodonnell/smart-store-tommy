@@ -1,15 +1,3 @@
-r"""
-tests/test_data_scrubber.py
-
-To run, open a terminal in the root project folder. 
-Activate your virtual environment if needed, and run one of the following commands:
-
-    py tests\test_data_scrubber.py
-    python3 tests\test_data_scrubber.py
-
-This test suite verifies that each function in the DataScrubber class works as expected.
-"""
-
 import unittest
 import pathlib
 import sys
@@ -38,7 +26,6 @@ ID,Name,Score,Date
 # Load the fake CSV data into a DataFrame
 df = pd.read_csv(csv_data)
 
-
 class TestDataScrubber(unittest.TestCase):
 
     def setUp(self):
@@ -50,7 +37,6 @@ class TestDataScrubber(unittest.TestCase):
         consistency = self.scrubber.check_data_consistency_before_cleaning()
         self.assertGreaterEqual(consistency['null_counts']['Score'], 0, "Null count for column Score should be 0 or more")
         self.assertGreaterEqual(consistency['duplicate_count'], 0, "Duplicate count should be 0 or more")
-
 
     def test_check_data_consistency_after_cleaning(self):
         """Test data consistency check after cleaning."""
@@ -111,6 +97,12 @@ class TestDataScrubber(unittest.TestCase):
     def test_reorder_columns(self):
         df_reordered = self.scrubber.reorder_columns(['Name', 'ID', 'Date'])
         self.assertEqual(df_reordered.columns.tolist(), ['Name', 'ID', 'Date'], "Columns not reordered correctly")
+
+    def test_get_summary_statistics(self):
+        """Test get_summary_statistics method for numerical columns."""
+        summary_stats = self.scrubber.get_summary_statistics()
+        self.assertIsInstance(summary_stats, pd.DataFrame, "Summary statistics should return a DataFrame")
+        self.assertIn('Score', summary_stats.columns, "Score should be included in the summary statistics")
 
 
 # Run the tests with verbosity=2 for detailed output
