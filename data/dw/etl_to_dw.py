@@ -14,12 +14,12 @@ DB_PATH = DW_DIR.joinpath("smart_sales.db")
 PREPARED_DATA_DIR = pathlib.Path("data").joinpath("prepared")
 
 def drop_unwanted_tables(cursor: sqlite3.Cursor) -> None:
-    """Drop all tables except 'customer', 'product', and 'sale'."""
+    """Drop all tables except 'customer', 'product', and 'sales'."""
     cursor.execute("SELECT name FROM sqlite_master WHERE type='table'")
     tables = cursor.fetchall()
     for table in tables:
         table_name = table[0]
-        if table_name not in ['customer', 'product', 'sale']:
+        if table_name not in ['customer', 'product', 'sales']:
             print(f"Dropping table: {table_name}")
             cursor.execute(f"DROP TABLE IF EXISTS {table_name}")
 
@@ -28,7 +28,7 @@ def create_schema(cursor: sqlite3.Cursor) -> None:
     # Drop tables to ensure schema alignment
     cursor.execute("DROP TABLE IF EXISTS customer")
     cursor.execute("DROP TABLE IF EXISTS product")
-    cursor.execute("DROP TABLE IF EXISTS sale")
+    cursor.execute("DROP TABLE IF EXISTS sales")
 
     # Recreate customer table
     cursor.execute("""
@@ -54,9 +54,9 @@ def create_schema(cursor: sqlite3.Cursor) -> None:
         )
     """)
 
-    # Recreate sale table
+    # Recreate sales table
     cursor.execute("""
-        CREATE TABLE IF NOT EXISTS sale (
+        CREATE TABLE IF NOT EXISTS sales (
             TransactionID INTEGER PRIMARY KEY,
             CustomerID INTEGER,
             ProductID INTEGER,
@@ -72,10 +72,10 @@ def create_schema(cursor: sqlite3.Cursor) -> None:
     """)
 
 def delete_existing_records(cursor: sqlite3.Cursor) -> None:
-    """Delete all existing records from the customer, product, and sale tables."""
+    """Delete all existing records from the customer, product, and sales tables."""
     cursor.execute("DELETE FROM customer")
     cursor.execute("DELETE FROM product")
-    cursor.execute("DELETE FROM sale")
+    cursor.execute("DELETE FROM sales")
 
 def insert_customers(customers_df: pd.DataFrame, cursor: sqlite3.Cursor) -> None:
     """Insert customer data into the customer table."""
@@ -94,8 +94,8 @@ def insert_products(products_df: pd.DataFrame, cursor: sqlite3.Cursor) -> None:
 
 def insert_sales(sales_df: pd.DataFrame, cursor: sqlite3.Cursor) -> None:
     """Insert sales data into the sales table."""
-    print(f"Inserting into 'sale' table: {sales_df.head()}")
-    sales_df.to_sql("sale", cursor.connection, if_exists="append", index=False)
+    print(f"Inserting into 'sales' table: {sales_df.head()}")
+    sales_df.to_sql("sales", cursor.connection, if_exists="append", index=False)
 
 def load_data_to_db() -> None:
     try:
