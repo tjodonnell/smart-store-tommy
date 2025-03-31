@@ -148,3 +148,9 @@ In this module we used a data_prep.py and data_scrubber.py file.
 We then used the following script in the terminal to test if the data_scrubber.py was working
 
 py tests\test_data_scrubber.py
+
+# Define, Create, and Populate Your DW Schema
+
+For debugging reasons, it helps to test and get the SQL correct FIRST before combining it into your Python. You can inline the SQL - or keep the .sql file separate in your repo.
+
+It's important to make sure that the scheme matches the rows exactly in order to ensure that they pull correctly. 
