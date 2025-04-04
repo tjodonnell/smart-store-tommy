@@ -162,10 +162,12 @@ downloaded ODBC and then added ODBC Data Source Name
 Linked vsc project to PowerBI using ODBC
 
 Created a new table to fetch total revenue per customer
-      SELECT c.name, SUM(s.amount) AS total_spent
-      FROM sale s
-      JOIN customer c ON s.customer_id = c.customer_id
-      GROUP BY c.name
-      ORDER BY total_spent DESC;
+```
+SELECT c.name, SUM(s.amount) AS total_spent
+FROM sale s
+JOIN customer c ON s.customer_id = c.customer_id
+GROUP BY c.name
+ORDER BY total_spent DESC;
+```
 
 Used visual panes to show how data can be utilized. 
