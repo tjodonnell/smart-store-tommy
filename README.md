@@ -153,4 +153,19 @@ py tests\test_data_scrubber.py
 
 For debugging reasons, it helps to test and get the SQL correct FIRST before combining it into your Python. You can inline the SQL - or keep the .sql file separate in your repo.
 
-It's important to make sure that the scheme matches the rows exactly in order to ensure that they pull correctly. 
+It's important to make sure that the scheme matches the rows exactly in order to ensure that they pull correctly.
+
+# P5. Cross-Platform Reporting with Power BI & Spark
+
+downloaded ODBC and then added ODBC Data Source Name 
+
+Linked vsc project to PowerBI using ODBC
+
+Created a new table to fetch total revenue per customer
+      SELECT c.name, SUM(s.amount) AS total_spent
+      FROM sale s
+      JOIN customer c ON s.customer_id = c.customer_id
+      GROUP BY c.name
+      ORDER BY total_spent DESC;
+
+Used visual panes to show how data can be utilized. 
