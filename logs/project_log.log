@@ -618,3 +618,13 @@
 2025-03-28 21:48:13.685 | INFO     | __main__:remove_outliers:49 - Removing outliers in column 'CustomerID': Lower bound = 996.0, Upper bound = 1016.0
 2025-03-28 21:48:13.701 | INFO     | __main__:save_prepared_data:29 - Data saved to C:\Projects\smart-store-tommy\data\prepared\customers_data_prepared.csv
 2025-03-28 21:48:13.707 | INFO     | __main__:main:87 - CUSTOMERS data preparation complete.
+2025-04-15 19:55:53.556 | INFO     | utils.logger:<module>:39 - Logging to file: logs\project_log.log
+2025-04-15 19:55:53.556 | INFO     | __main__:main:210 - Starting OLAP Cubing process...
+2025-04-15 19:55:53.572 | ERROR    | __main__:ingest_sales_data_from_dw:117 - Error loading sale table data from data warehouse: Execution failed on sql 'SELECT * FROM sale': no such table: sale
+2025-04-15 20:03:25.514 | INFO     | utils.logger:<module>:39 - Logging to file: logs\project_log.log
+2025-04-15 20:03:25.514 | INFO     | __main__:main:112 - Starting OLAP Cubing process...
+2025-04-15 20:03:25.563 | INFO     | __main__:ingest_sales_data_from_dw:28 - Sales data successfully loaded from SQLite data warehouse.
+2025-04-15 20:03:25.588 | INFO     | __main__:create_olap_cube:64 - OLAP cube created with dimensions: ['DayOfWeek', 'ProductID', 'CustomerID']
+2025-04-15 20:03:25.598 | INFO     | __main__:write_cube_to_csv:104 - OLAP cube saved to data\olap_cubing_outputs\multidimensional_olap_cube.csv.
+2025-04-15 20:03:25.598 | INFO     | __main__:main:136 - OLAP Cubing process completed successfully.
+2025-04-15 20:03:25.598 | INFO     | __main__:main:137 - Please see outputs in data\olap_cubing_outputs
