@@ -115,7 +115,33 @@ def visualize_sales_by_weekday_and_product(cube_df: pd.DataFrame, products_df: p
     except Exception as e:
         logger.error(f"Error visualizing sales by day and product: {e}")
         raise
+    
+def visualize_total_sales_by_category(products_df: pd.DataFrame) -> None:
+    """Visualize total sales by product category."""
+    try:
+        # Aggregate sales by product category
+        category_sales = products_df.groupby("Category")["SaleAmount_sum"].sum().reset_index()
+        category_sales.rename(columns={"Category": "product_category", "SaleAmount_sum": "sum(sale_amount)"}, inplace=True)
 
+        # Create the bar chart
+        import seaborn as sns
+        import matplotlib.pyplot as plt
+
+        sns.barplot(data=category_sales, x="product_category", y="sum(sale_amount)", palette="viridis")
+        plt.xticks(rotation=45)
+        plt.title("Total Sales by Product Category")
+        plt.xlabel("Product Category")
+        plt.ylabel("Total Sales (USD)")
+        plt.tight_layout()
+
+        # Save the visualization
+        output_path = RESULTS_OUTPUT_DIR.joinpath("total_sales_by_category.png")
+        plt.savefig(output_path)
+        logger.info(f"Bar chart saved to {output_path}.")
+        plt.show()
+    except Exception as e:
+        logger.error(f"Error visualizing total sales by product category: {e}")
+        raise
 
 def main():
     """Main function for analyzing and visualizing top product sales by day of the week."""

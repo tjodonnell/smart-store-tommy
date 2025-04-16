@@ -17,6 +17,8 @@ PROCESS:
 import pandas as pd
 import pathlib
 import logging
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s | %(levelname)s | %(message)s")
@@ -30,6 +32,24 @@ RESULTS_OUTPUT_DIR: pathlib.Path = pathlib.Path("data").joinpath("results")
 # Create output directory for results if it doesn't exist
 RESULTS_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
+# Load the results
+customer_stats = pd.read_csv("c:/Projects/smart-store-tommy/data/results/customer_average_transaction_size.csv")
+
+# Sort by AverageTransactionSize for better visualization
+customer_stats = customer_stats.sort_values(by="AverageTransactionSize", ascending=False)
+
+# Create the bar chart
+plt.figure(figsize=(12, 6))
+plt.bar(customer_stats["CustomerID"].astype(str), customer_stats["AverageTransactionSize"], color="skyblue")
+plt.title("Average Transaction Size by Customer", fontsize=16)
+plt.xlabel("Customer ID", fontsize=12)
+plt.ylabel("Average Transaction Size (USD)", fontsize=12)
+plt.xticks(rotation=45, fontsize=10)
+plt.tight_layout()
+
+# Save and show the chart
+plt.savefig("c:/Projects/smart-store-tommy/data/results/average_transaction_size_by_customer.png")
+plt.show()
 
 def load_olap_cube(file_path: pathlib.Path) -> pd.DataFrame:
     """Load the precomputed OLAP cube data."""
@@ -40,7 +60,6 @@ def load_olap_cube(file_path: pathlib.Path) -> pd.DataFrame:
     except Exception as e:
         logger.error(f"Error loading OLAP cube data: {e}")
         raise
-
 
 def calculate_average_transaction_size(cube_df: pd.DataFrame) -> pd.DataFrame:
     """Calculate the average transaction size for each customer."""
