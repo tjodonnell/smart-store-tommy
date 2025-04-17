@@ -200,7 +200,7 @@ Used visual panes to show how data can be utilized.
 ![Products Sold by Month](data/results/products_sold_by_month_line_graph.png)
 
 ### Underperforming Products in March and October
-![Underperforming Products](data/results/underperforming_products.png)
+![Underperforming Products](data/results/underperforming_products.csv)
 
 ### Total Sales by Month
 ![Total Sales by Month](data/results/sales_by_month.png)
