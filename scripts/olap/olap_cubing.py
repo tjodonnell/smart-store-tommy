@@ -106,7 +106,6 @@ def write_cube_to_csv(cube: pd.DataFrame, filename: str) -> None:
         logger.error(f"Error saving OLAP cube to CSV file: {e}")
         raise
 
-
 def main():
     """Main function for OLAP cubing."""
     logger.info("Starting OLAP Cubing process...")
@@ -117,11 +116,11 @@ def main():
     # Step 2: Add additional columns for time-based dimensions
     sales_df["SaleDate"] = pd.to_datetime(sales_df["SaleDate"])
     sales_df["DayOfWeek"] = sales_df["SaleDate"].dt.day_name()
-    sales_df["Month"] = sales_df["SaleDate"].dt.month
+    sales_df["Month"] = sales_df["SaleDate"].dt.month  # Add Month column
     sales_df["Year"] = sales_df["SaleDate"].dt.year
 
     # Step 3: Define dimensions and metrics for the cube
-    dimensions = ["DayOfWeek", "ProductID", "CustomerID"]
+    dimensions = ["DayOfWeek", "Month", "ProductID", "CustomerID"]  # Include Month
     metrics = {
         "SaleAmount": ["sum", "mean"],
         "TransactionID": "count"
@@ -135,7 +134,6 @@ def main():
 
     logger.info("OLAP Cubing process completed successfully.")
     logger.info(f"Please see outputs in {OLAP_OUTPUT_DIR}")
-
 
 if __name__ == "__main__":
     main()
