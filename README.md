@@ -174,19 +174,19 @@ Used visual panes to show how data can be utilized.
 
 ### Module 6 - BI Insights and Storytelling
 
-•	Section 1. The Business Goal
+## Section 1. The Business Goal
    • 	The CEO of Smart Store wants to run a new marketing campaign to pick up sales in the slowest months of the year, outside of the holiday months of November and December. The goal is to figure out when those months are, which products are underperforming during those months, and if there is a mode of communication that is preferred based on total customer sales to push the marketing campaign through. 
-•	Section 2. Data Source
+## Section 2. Data Source
    •	What information did you start with (prepared data, data warehouse, or pre-computed cube)? I used an olap_cubing file which generates an OLAP (Online Analytical Processing) cube from raw sales data stored in my SQLite database.
    •	Clearly indicate which columns of which tables were used: From my sales table I used SaleDate, ProductID, CustomerID, SaleAmount, TransactionID. From the products table I used ProductID, ProductName, Category. From the customers table I used ContactMethod.
-•	Section 3. Tools
+## Section 3. Tools
    •	Tell us what tools you used and why: I used the script that was provided in denisecase/smart-sales-olap to get started. I then used Microsoft CoPilot when I hit a snag. 
-•	Section 4. Workflow & Logic
+## Section 4. Workflow & Logic
    •	Describe the dimensions and aggregations - the logic needed for your analysis: 
    •	Dimensions: The dimensions I used were Month extracted from SaleDate, ProductID, ProductName, Category, CustomerID, PreferredContactMethod
    •	Aggregations: For Total Sales I used the sum of sales and grouped it by month as well as ProductID, PreferredContactMethod, and ProductID/ ProductName. 
    •	Logic: To ID the slowest month I grouped the sales data by month and calculated total sales. A bar chart easily visualizes the two slowest months. Once those months have been identified, I created a line graph to get a visual at a glance of the total sales of each individual product throughout the year using the sum of totalsales by product. I also created a table to go with the line graph to breakout the products that sold the fewest in March and October. Once the months and products are selected, I wanted to find the communication medium to reach customers. For this I grouped sales data by PreferredContactMethod and calculated the total sales. I placed this in a bar chart to show which method the most lucrative customers preferred.  
-•	Section 5 and 6. Results and Suggested Business Action 
+## Section 5 and 6. Results and Suggested Business Action 
    •	Present your insights with narrative, visualizations any suggested actions based on the results you uncovered
    After looking through the visuals and information that was gathered, it appears the two lowest earning months outside the holidays are March and October. As these months are spread throughout the year, it would be my suggestion to run two separate marketing campaigns. 
    Once the months were identified, it was time to predetermine the products that would be highlighted in these campaigns. For March, data shows that the two lowest earning products were the protector and the football. To promote these items the campaign can center around the warming weather and the future pool parties people will have. Ads can feature kids playing with a football in the pool and water splashing on a phone that is protected by a screen protector. For October, data shows that hats are the slowest moving. This campaign could center around NFL team hats during the football season. 
@@ -205,6 +205,6 @@ Used visual panes to show how data can be utilized.
 ### Total Sales by Month
 ![Total Sales by Month](data/results/sales_by_month.png)
 
-   •	Section 7. Challenges
+## Section 7. Challenges
    •	Mention any challenges you encountered and how they were resolved.
    I didn’t really have any challenges. I had to force myself not to get too in depth with this marketing campaign. I wanted to drill down further and really dissect target markets and inventory trends throughout the year. 
