@@ -208,3 +208,59 @@ Used visual panes to show how data can be utilized.
 ## Section 7. Challenges
    •	Mention any challenges you encountered and how they were resolved.
    I didn’t really have any challenges. I had to force myself not to get too in depth with this marketing campaign. I wanted to drill down further and really dissect target markets and inventory trends throughout the year. 
+
+### Module 7 - Custom BI Project 
+
+## Section 1. 
+   The Business Goal : Create an advertising campaign that combines the lowest and highest selling items in the lowest selling months for each region.
+## Section 2. 
+   Data Source: I used the prepared database from previous weeks. 
+## Section 3. 
+   Tools Used: I used VSC and Microsoft Copilot
+## Section 4. 
+   Workflow & Logic: Since I am working on limited data, I am assuming the months with no sales indicates the stores were closed for those months. So I am focusing on months with sales data. Once we have that assumption, I want to identify the lowest salling months by region. I then want to analyze product sales during the lowest selling month using productid and with total sales. The I want to identify the lowest and highest selling products using the month we found.
+## Section 5. Results (narrative + visualizations): 
+   The first thing I wanted to do was find the lowest selling months by region. I then made a csv file to easily read the visual. 
+
+   ### Total Sales by Month and Region
+   ![Total Sales by Month and Region](data/results/sales_by_month_and_region_line_graph.png)
+
+   From there it was showing what category the company sees the highest sales in without the campaign. This gives decision makers a basis to help gauge the rest of the charts. 
+
+   ### Least and Best Performing Months by Region
+
+   The results of the analysis can be found in the following CSV file:
+
+   [Least and Best Performing Months by Region](data/results/least_and_best_performing_months_by_region.csv)
+
+   From there it was showing what category the company sees the highest sales in without the campaign. This gives decision makers a basis to help gauge the rest of the charts. 
+
+   ### Most Purchased Products by Region
+   ![Most Purchased Products by Region](data/results/most_purchased_products_by_region.png)
+
+   Now that we know what our strongest products are by region, I break down the product sales by month by region. 
+
+   ### Product Sales by Month and Region
+
+   #### East Region
+   ![Product Sales in East Region](data/results/product_sales_east_line_chart.png)
+
+   #### North Region
+   ![Product Sales in North Region](data/results/product_sales_north_line_chart.png)
+
+   #### South Region
+   ![Product Sales in South Region](data/results/product_sales_south_line_chart.png)
+
+   #### West Region
+   ![Product Sales in West Region](data/results/product_sales_west_line_chart.png)
+
+## Section 6. Suggested Business Action: 
+      East – September – Only sold cables that month, no other sales
+      North – January – Only sold Hoodies, no other sales
+      South – January – Only sold hoodies, no other sales
+      West – August – Only sold protectors, no other items sold. 
+   For each regions lowest selling months there was only one type of product sold. So when developing a marketing campaign we want to base our campaign around ‘cables’ in the east, which we could pair with protectors. Hoodies in both the North and South which we could pair with hats or jackets. In the west the highest selling product was protectors, which we could sell with cables, but also showcase hats and footballs as football season gears up.
+## Section 7. Challenges: 
+   My only challenge was working with the limited data. I am used to using years of data to come up with campaigns. One year is not a lot of time. 
+## Section 8. Ethical Considerations: 
+   With advertising, you want to make sure you are always running balanced promotions ensuring that the campaign isn’t unfairly pressuring customers. Even though regions might have varying consumer behavior, it’s important to ensure that one region isn’t favored over another. It’s also important to consider customer preferences if they choose to opt out. From a data perspective, it’s always important to make sure that the data is secured and is being used with how it was intended (ie not sold to a data company)

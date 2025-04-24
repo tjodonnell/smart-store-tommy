@@ -13,6 +13,7 @@ from utils.logger import logger  # noqa: E402
 # Constants
 DW_DIR: pathlib.Path = pathlib.Path("data").joinpath("dw")
 DB_PATH: pathlib.Path = DW_DIR.joinpath("smart_sales.db")
+CUSTOMERS_FILE: pathlib.Path = pathlib.Path("data").joinpath("prepared").joinpath("customers_data_prepared.csv")
 OLAP_OUTPUT_DIR: pathlib.Path = pathlib.Path("data").joinpath("olap_cubing_outputs")
 
 # Create output directory if it does not exist
@@ -29,6 +30,17 @@ def ingest_sales_data_from_dw() -> pd.DataFrame:
         return sales_df
     except Exception as e:
         logger.error(f"Error loading sales table data from data warehouse: {e}")
+        raise
+
+
+def ingest_customers_data(file_path: pathlib.Path) -> pd.DataFrame:
+    """Ingest customer data from the prepared CSV file."""
+    try:
+        customers_df = pd.read_csv(file_path)
+        logger.info(f"Customer data successfully loaded from {file_path}.")
+        return customers_df
+    except Exception as e:
+        logger.error(f"Error loading customer data: {e}")
         raise
 
 
@@ -106,6 +118,7 @@ def write_cube_to_csv(cube: pd.DataFrame, filename: str) -> None:
         logger.error(f"Error saving OLAP cube to CSV file: {e}")
         raise
 
+
 def main():
     """Main function for OLAP cubing."""
     logger.info("Starting OLAP Cubing process...")
@@ -113,27 +126,34 @@ def main():
     # Step 1: Ingest sales data
     sales_df = ingest_sales_data_from_dw()
 
-    # Step 2: Add additional columns for time-based dimensions
+    # Step 2: Ingest customer data
+    customers_df = ingest_customers_data(CUSTOMERS_FILE)
+
+    # Step 3: Merge sales data with customer data to include Region
+    sales_df = sales_df.merge(customers_df[["CustomerID", "Region"]], on="CustomerID", how="left")
+
+    # Step 4: Add additional columns for time-based dimensions
     sales_df["SaleDate"] = pd.to_datetime(sales_df["SaleDate"])
     sales_df["DayOfWeek"] = sales_df["SaleDate"].dt.day_name()
     sales_df["Month"] = sales_df["SaleDate"].dt.month  # Add Month column
     sales_df["Year"] = sales_df["SaleDate"].dt.year
 
-    # Step 3: Define dimensions and metrics for the cube
-    dimensions = ["DayOfWeek", "Month", "ProductID", "CustomerID"]  # Include Month
+    # Step 5: Define dimensions and metrics for the cube
+    dimensions = ["DayOfWeek", "Month", "Region", "ProductID", "CustomerID"]  # Include Region
     metrics = {
         "SaleAmount": ["sum", "mean"],
         "TransactionID": "count"
     }
 
-    # Step 4: Create the cube
+    # Step 6: Create the cube
     olap_cube = create_olap_cube(sales_df, dimensions, metrics)
 
-    # Step 5: Save the cube to a CSV file
+    # Step 7: Save the cube to a CSV file
     write_cube_to_csv(olap_cube, "multidimensional_olap_cube.csv")
 
     logger.info("OLAP Cubing process completed successfully.")
     logger.info(f"Please see outputs in {OLAP_OUTPUT_DIR}")
+
 
 if __name__ == "__main__":
     main()
